@@ -25,11 +25,19 @@ var welcome = `
 
 func main() {
 
-	fmt.Println("Setting path to /bin")
-	os.Setenv("PATH", "/bin")
 	fmt.Println("Creating /dev/null")
 	os.Create("/dev/null")
 	os.Chmod("/dev/null", 666)
+
+	fmt.Println("Setting path to /bin")
+	os.Setenv("PATH", "/bin")
+
+	fmt.Println("Creating /proc/")
+	os.Mkdir("/proc", 777)
+	err := exec.Command("mount", "-t", "proc", "p", "/proc").Run()
+	if err != nil {
+		fmt.Println("Error: Could not mount /proc")
+	}
 
 	time.Sleep(time.Second * 1)
 	fmt.Println("--- BRUNIX V0.0.0.0.0.0.1 ---")
