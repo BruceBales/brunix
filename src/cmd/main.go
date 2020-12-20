@@ -29,8 +29,8 @@ func main() {
 	os.Create("/dev/null")
 	os.Chmod("/dev/null", 666)
 
-	fmt.Println("Setting path to /bin")
-	os.Setenv("PATH", "/bin")
+	fmt.Println("Setting path to /bin and /usr/sbin")
+	os.Setenv("PATH", "/bin:/usr/bin")
 
 	fmt.Println("Creating /proc/")
 	os.Mkdir("/proc", 777)
@@ -40,7 +40,7 @@ func main() {
 	}
 
 	time.Sleep(time.Second * 1)
-	fmt.Println("--- BRUNIX V0.0.0.0.0.0.1 ---")
+	fmt.Println("--- BRUNIX V0.1 ---")
 	fmt.Println(welcome)
 	reader := bufio.NewReader(os.Stdin)
 
@@ -79,6 +79,7 @@ func main() {
 			cmd := exec.Command(args[0], args[1:]...)
 			cmd.Stderr = os.Stderr
 			cmd.Stdout = os.Stdout
+			cmd.Stdin = os.Stdin
 			err = cmd.Run()
 			if err != nil {
 				fmt.Println(err)
