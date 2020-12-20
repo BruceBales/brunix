@@ -1,6 +1,6 @@
 #!/bin/bash
 
-go build -o ./initramfs-busybox/init ./src/cmd
+./sourcecompile.sh
 
 cd initramfs-busybox
 
