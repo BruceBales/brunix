@@ -1,0 +1,4 @@
+/* GNU ld script
+*/
+OUTPUT_FORMAT(elf64-x86-64)
+GROUP ( /home/bruce/glibc/lib/libm-2.32.9000.a /home/bruce/glibc/lib/libmvec.a )

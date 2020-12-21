@@ -2,7 +2,7 @@
 
 ./sourcecompile.sh
 
-cd initramfs-busybox
+cd initramfs
 
 find . -print0 | cpio --null -ov --format=newc | gzip -9 > ../CD_ROOT/boot/initrd.img
 

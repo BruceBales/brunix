@@ -27,8 +27,10 @@ func main() {
 	os.Create("/dev/null")
 	os.Chmod("/dev/null", 666)
 
-	fmt.Println("Setting path to /bin and /usr/sbin")
-	os.Setenv("PATH", "/bin:/usr/bin")
+	os.Setenv("LD_LIBRARY_PATH", "/lib:/lib64")
+
+	fmt.Println("Setting user path")
+	os.Setenv("PATH", "/bin:/sbin:/usr/bin:/usr/sbin:/go/bin/")
 
 	fmt.Println("Creating /proc/")
 	os.Mkdir("/proc", 777)
@@ -37,11 +39,17 @@ func main() {
 		fmt.Println("Error: Could not mount /proc")
 	}
 
+	cmd := exec.Command("mount", "-t", "devtmpfs", "devtmpfs", "/dev")
+	err = cmd.Run()
+	if err != nil {
+		fmt.Println(err)
+	}
+
 	time.Sleep(time.Second * 1)
 	fmt.Println("--- BRUNIX V0.1 ---")
 	fmt.Println(welcome)
 
-	cmd := exec.Command("gsh")
+	cmd = exec.Command("gsh")
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
 	cmd.Stdin = os.Stdin
