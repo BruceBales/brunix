@@ -1,1 +1,5 @@
 iso/
+
+initramfs.cpio.gz
+
+CD_ROOT/boot/initrd.img
